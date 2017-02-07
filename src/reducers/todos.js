@@ -1,11 +1,18 @@
 
 import { handleActions } from 'redux-actions'
-var videolist = new Array();
-var video = new Object();
-video.name= ""
-video.url = ""
-videolist.push(video);
+import {FETCH_DATA, RECEIVE_DATA} from '../actions/todos'
+var videolist = [];
+var video = {};
+video.description= "test"
+video.url = "test"
+videolist.push(video)
+var initialState = {
+    videos: videolist,
+    fetchingData: false
+}
 
-export const reducer = handleActions({
-    ['goto video page']: (state, action)=>[...state]
-},videolist)
+export const todos = handleActions({
+    [FETCH_DATA]: (state, action)=>{return Object.assign({},state,{fetchingData:action.payload})},
+    [RECEIVE_DATA]: (state,action) => {return Object.assign({},state,{videos:action.payload})}
+},initialState)
+

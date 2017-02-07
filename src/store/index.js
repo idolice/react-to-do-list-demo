@@ -1,8 +1,9 @@
 import { createStore, applyMiddleware } from 'redux'
+import thunkMiddleware from 'redux-thunk';
 
 import promiseMiddleware from 'redux-promise'
 import { logger } from '../middleware'
-import rootReducer from '../reducers'
+import {todos} from '../reducers/todos'
 
 export default function configure(initialState, processEnv) {
   const env = processEnv.NODE_ENV
@@ -13,13 +14,14 @@ export default function configure(initialState, processEnv) {
   let createStoreWithMiddleware
   if (env === 'development') {
     createStoreWithMiddleware = applyMiddleware(
+        thunkMiddleware,
       promiseMiddleware
     )(create)
   } else {
-    createStoreWithMiddleware = applyMiddleware(promiseMiddleware)(create)
+    createStoreWithMiddleware = applyMiddleware(thunkMiddleware,promiseMiddleware)(create)
   }
 
-  const store = createStoreWithMiddleware(rootReducer, initialState)
+  const store = createStoreWithMiddleware(todos, initialState)
 
   if (module.hot) {
     module.hot.accept('../reducers', () => {
