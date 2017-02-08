@@ -5,6 +5,7 @@ var videolist = [];
 var video = {};
 video.description= "test"
 video.url = "test"
+video.picUrl = "test"
 videolist.push(video)
 var initialState = {
     videos: videolist,

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {hashHistory} from 'react-router'
+import {hashHistory, browserHistory} from 'react-router'
 export default class MainArea extends Component{
     constructor(props){
         super(props)
@@ -8,14 +8,13 @@ export default class MainArea extends Component{
     getToUrl(){
 
         this.props.fetchVideos(this.props.routeurl)
-        hashHistory.push(this.props.url)
+        browserHistory.push(this.props.url)
 
     }
     render(){
         return(
             <div>
                 <button onClick={this.getToUrl} type="button">
-                    <p>{this.props.bool}</p>
                     <img/>
                 </button>
             </div>

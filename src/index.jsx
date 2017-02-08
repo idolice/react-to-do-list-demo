@@ -1,4 +1,4 @@
-import {Router, Route, hashHistory} from 'react-router'
+import {Router, Route, hashHistory, browserHistory} from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 import { Provider } from 'react-redux'
 import ReactDOM from 'react-dom'
@@ -12,8 +12,8 @@ const store = configure(undefined, process.env)
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={hashHistory}>
-      <Route path='/' component={HomePage}/>
+    <Router history={browserHistory}>
+      <Route path='/home' component={HomePage}/>
       <Route path="/video" component={Video}/>
     </Router>
   </Provider>,
